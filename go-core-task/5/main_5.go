@@ -12,22 +12,13 @@ func intersectSlice(s1 []int, s2 []int) (bool, []int) {
 	tempSlice := make([]int, len(s1))
 	m := 0
 	k := 0
-	found := false
-	prev := 0
-	for i1, v1 := range s1 {
-		if i1 > 0 && found && v1 == prev {
-			prev = v1
-			continue
-		}
-		found = false
+
+	for _, v1 := range s1 {
 		if slices.Contains(s2[m:], v1) {
 			tempSlice[k] = v1
 			k++
 			m++
-			found = true
-
 		}
-		prev = v1
 	}
 	resultingSlice := make([]int, k)
 	copy(resultingSlice, tempSlice)
@@ -45,4 +36,10 @@ func main() {
 	y := []int{42, 42, 2, 3, 43}
 	ok, intersection = intersectSlice(x, y)
 	fmt.Printf("Slices intersection: %v, %v\n", ok, intersection)
+
+	k := []int{65, 3, 11, 11, 678, 64}
+	v := []int{11, 11, 2, 3, 43}
+	ok, intersection = intersectSlice(k, v)
+	fmt.Printf("Slices intersection: %v, %v\n", ok, intersection)
+
 }
